@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { NgxConditionBuilderComponent } from './ngx-condition-builder.component';
+import { NgxConditionBuilderComponent } from './condition-builder.component';
 
 
 

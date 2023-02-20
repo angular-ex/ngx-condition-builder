@@ -1,6 +1,6 @@
 import { TestBed } from '@angular/core/testing';
 
-import { NgxConditionBuilderService } from './ngx-condition-builder.service';
+import { NgxConditionBuilderService } from './condition-builder.service';
 
 describe('NgxConditionBuilderService', () => {
   let service: NgxConditionBuilderService;
