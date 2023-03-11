@@ -4,9 +4,10 @@
   "scripts": {
     "ng": "ng",
     "start": "ng serve ngx-condition-builder-demo",
-    "build": "ng build",
-    "watch": "ng build --watch --configuration development",
-    "test": "ng test"
+    "build:app": "ng build ngx-condition-builder-demo --configuration production",
+    "watch:app": "ng build ngx-condition-builder-demo --watch --configuration development",
+    "build:lib": "ng build ngx-condition-builder --configuration production",
+    "test:lib": "ng test ngx-condition-builder"
   },
   "private": true,
   "dependencies": {
