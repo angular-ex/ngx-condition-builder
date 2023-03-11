@@ -21,7 +21,7 @@ import {
   ValidationErrors,
   Validator,
 } from '@angular/forms';
-import { QueryArrowIconDirective } from './condition-arrow-icon.directive';
+import { NgxConditionArrowIconDirective } from './condition-arrow-icon.directive';
 import {
   ArrowIconContext,
   ButtonGroupContext,
@@ -34,21 +34,21 @@ import {
   LocalRuleMeta,
   OperatorContext,
   Option,
-  QueryBuilderClassNames,
-  QueryBuilderConfig,
+  ConditionBuilderClassNames,
+  ConditionBuilderConfig,
   RemoveButtonContext,
   Rule,
   RuleSet,
   SwitchGroupContext,
 } from './condition-builder.interfaces';
-import { QueryButtonGroupDirective } from './condition-button-group.directive';
-import { QueryEmptyWarningDirective } from './condition-empty-warning.directive';
-import { QueryEntityDirective } from './condition-entity.directive';
-import { QueryFieldDirective } from './condition-field.directive';
-import { QueryInputDirective } from './condition-input.directive';
-import { QueryOperatorDirective } from './condition-operator.directive';
-import { QueryRemoveButtonDirective } from './condition-remove-button.directive';
-import { QuerySwitchGroupDirective } from './condition-switch-group.directive';
+import { NgxConditionButtonGroupDirective } from './condition-button-group.directive';
+import { NgxConditionEmptyWarningDirective } from './condition-empty-warning.directive';
+import { NgxConditionEntityDirective } from './condition-entity.directive';
+import { NgxConditionFieldDirective } from './condition-field.directive';
+import { NgxConditionInputDirective } from './condition-input.directive';
+import { NgxConditionOperatorDirective } from './condition-operator.directive';
+import { NgxConditionRemoveButtonDirective } from './condition-remove-button.directive';
+import { NgxConditionSwitchGroupDirective } from './condition-switch-group.directive';
 
 export const CONTROL_VALUE_ACCESSOR: any = {
   provide: NG_VALUE_ACCESSOR,
@@ -64,8 +64,8 @@ export const VALIDATOR: any = {
 
 @Component({
   selector: 'ngx-condition-builder',
-  template: ` <p>ngx-condition-builder works!</p> `,
-  styles: [],
+  templateUrl: './condition-builder.component.html',
+  styleUrls: ['./condition-builder.component.scss'],
   providers: [CONTROL_VALUE_ACCESSOR, VALIDATOR],
 })
 export class NgxConditionBuilderComponent
@@ -74,7 +74,7 @@ export class NgxConditionBuilderComponent
   public fields: Field[] = [];
   public filterFields: Field[] = []; // TODO: ?
   public entities: Entity[] = [];
-  public defaultClassNames: QueryBuilderClassNames = {
+  public defaultClassNames: ConditionBuilderClassNames = {
     arrowIconButton: 'q-arrow-icon-button',
     arrowIcon: 'q-icon q-arrow-icon',
     removeIcon: 'q-icon q-remove-icon',
@@ -124,19 +124,19 @@ export class NgxConditionBuilderComponent
   @Input() allowCollapse: boolean = false;
   @Input() emptyMessage: string =
     'A ruleset cannot be empty. Please add a rule or remove it all together.';
-  @Input() classNames: QueryBuilderClassNames = {};
+  @Input() classNames: ConditionBuilderClassNames = {};
   @Input() operatorMap: { [key: string]: string[] } = {};
   @Input() parentValue!: RuleSet;
-  @Input() config: QueryBuilderConfig = { fields: {} };
-  @Input() parentArrowIconTemplate?: QueryArrowIconDirective;
-  @Input() parentInputTemplates!: QueryList<QueryInputDirective>;
-  @Input() parentOperatorTemplate?: QueryOperatorDirective;
-  @Input() parentFieldTemplate?: QueryFieldDirective;
-  @Input() parentEntityTemplate?: QueryEntityDirective;
-  @Input() parentSwitchGroupTemplate?: QuerySwitchGroupDirective;
-  @Input() parentButtonGroupTemplate?: QueryButtonGroupDirective;
-  @Input() parentRemoveButtonTemplate?: QueryRemoveButtonDirective;
-  @Input() parentEmptyWarningTemplate?: QueryEmptyWarningDirective;
+  @Input() config: ConditionBuilderConfig = { fields: {} };
+  @Input() parentArrowIconTemplate?: NgxConditionArrowIconDirective;
+  @Input() parentInputTemplates!: QueryList<NgxConditionInputDirective>;
+  @Input() parentOperatorTemplate?: NgxConditionOperatorDirective;
+  @Input() parentFieldTemplate?: NgxConditionFieldDirective;
+  @Input() parentEntityTemplate?: NgxConditionEntityDirective;
+  @Input() parentSwitchGroupTemplate?: NgxConditionSwitchGroupDirective;
+  @Input() parentButtonGroupTemplate?: NgxConditionButtonGroupDirective;
+  @Input() parentRemoveButtonTemplate?: NgxConditionRemoveButtonDirective;
+  @Input() parentEmptyWarningTemplate?: NgxConditionEmptyWarningDirective;
   @Input() parentChangeCallback?: () => void;
   @Input() parentTouchedCallback?: () => void;
   @Input() persistValueOnFieldChange: boolean = false;
@@ -152,22 +152,22 @@ export class NgxConditionBuilderComponent
 
   @ViewChild('treeContainer', { static: true }) treeContainer!: ElementRef;
 
-  @ContentChild(QueryButtonGroupDirective)
-  buttonGroupTemplate?: QueryButtonGroupDirective;
-  @ContentChild(QuerySwitchGroupDirective)
-  switchGroupTemplate?: QuerySwitchGroupDirective;
-  @ContentChild(QueryFieldDirective) fieldTemplate?: QueryFieldDirective;
-  @ContentChild(QueryEntityDirective) entityTemplate?: QueryEntityDirective;
-  @ContentChild(QueryOperatorDirective)
-  operatorTemplate?: QueryOperatorDirective;
-  @ContentChild(QueryRemoveButtonDirective)
-  removeButtonTemplate?: QueryRemoveButtonDirective;
-  @ContentChild(QueryEmptyWarningDirective)
-  emptyWarningTemplate?: QueryEmptyWarningDirective;
-  @ContentChildren(QueryInputDirective)
-  inputTemplates!: QueryList<QueryInputDirective>;
-  @ContentChild(QueryArrowIconDirective)
-  arrowIconTemplate?: QueryArrowIconDirective;
+  @ContentChild(NgxConditionButtonGroupDirective)
+  buttonGroupTemplate?: NgxConditionButtonGroupDirective;
+  @ContentChild(NgxConditionSwitchGroupDirective)
+  switchGroupTemplate?: NgxConditionSwitchGroupDirective;
+  @ContentChild(NgxConditionFieldDirective) fieldTemplate?: NgxConditionFieldDirective;
+  @ContentChild(NgxConditionEntityDirective) entityTemplate?: NgxConditionEntityDirective;
+  @ContentChild(NgxConditionOperatorDirective)
+  operatorTemplate?: NgxConditionOperatorDirective;
+  @ContentChild(NgxConditionRemoveButtonDirective)
+  removeButtonTemplate?: NgxConditionRemoveButtonDirective;
+  @ContentChild(NgxConditionEmptyWarningDirective)
+  emptyWarningTemplate?: NgxConditionEmptyWarningDirective;
+  @ContentChildren(NgxConditionInputDirective)
+  inputTemplates!: QueryList<NgxConditionInputDirective>;
+  @ContentChild(NgxConditionArrowIconDirective)
+  arrowIconTemplate?: NgxConditionArrowIconDirective;
 
   private defaultTemplateTypes: string[] = [
     'string',
@@ -296,10 +296,10 @@ export class NgxConditionBuilderComponent
     return null;
   }
 
-  findQueryInput(type: string): QueryInputDirective | undefined {
+  findQueryInput(type: string): NgxConditionInputDirective | undefined {
     const templates = this.parentInputTemplates || this.inputTemplates;
     return templates.find(
-      (item: QueryInputDirective) => item.queryInputType === type
+      (item: NgxConditionInputDirective) => item.queryInputType === type
     );
   }
 
@@ -390,7 +390,7 @@ export class NgxConditionBuilderComponent
       : this.defaultClassNames;
     const classNames = args
       .map(
-        (id: keyof QueryBuilderClassNames) =>
+        (id: keyof ConditionBuilderClassNames) =>
           clsLookup[id] || this.defaultClassNames[id]
       )
       .filter((c) => !!c);

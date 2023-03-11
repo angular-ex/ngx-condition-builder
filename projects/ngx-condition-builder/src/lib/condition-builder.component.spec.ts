@@ -1,6 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { NgxConditionBuilderComponent } from './ngx-condition-builder.component';
+import { NgxConditionBuilderComponent } from './condition-builder.component';
 
 describe('NgxConditionBuilderComponent', () => {
   let component: NgxConditionBuilderComponent;

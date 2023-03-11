@@ -1,7 +1,7 @@
 import { Directive, Input, TemplateRef } from '@angular/core';
 
 @Directive({ selector: '[queryInput]' })
-export class QueryInputDirective {
+export class NgxConditionInputDirective {
   /** Unique name for query input type. */
   @Input()
   get queryInputType(): string {
@@ -15,7 +15,7 @@ export class QueryInputDirective {
     }
     this._type = value;
   }
-  private _type: string;
+  private _type: string = '';
 
   constructor(public template: TemplateRef<any>) {}
 }

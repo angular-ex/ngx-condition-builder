@@ -1,6 +1,6 @@
 import { Directive, TemplateRef } from '@angular/core';
 
 @Directive({ selector: '[queryField]' })
-export class QueryFieldDirective {
+export class NgxConditionFieldDirective {
   constructor(public template: TemplateRef<any>) {}
 }

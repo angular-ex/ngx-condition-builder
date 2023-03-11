@@ -14,7 +14,9 @@
     "paths": {
       "ngx-condition-builder": [
         "dist/ngx-condition-builder"
-      ]
+      ],
+      "@angular-ex/ngx-condition-builder/*": ["projects/ngx-condition-builder/src/*"],
+      "@angular-ex/ngx-condition-builder": ["projects/ngx-condition-builder/src/public-api.ts"]
     },
     "declaration": false,
     "downlevelIteration": true,

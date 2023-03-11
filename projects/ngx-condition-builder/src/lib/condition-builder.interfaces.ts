@@ -49,7 +49,7 @@ export interface Entity {
   defaultField?: any;
 }
 
-export interface QueryBuilderClassNames {
+export interface ConditionBuilderClassNames {
   arrowIconButton?: string;
   arrowIcon?: string;
   removeIcon?: string;
@@ -84,7 +84,7 @@ export interface QueryBuilderClassNames {
   inputControlSize?: string;
 }
 
-export interface QueryBuilderConfig {
+export interface ConditionBuilderConfig {
   fields: FieldMap;
   entities?: EntityMap;
   allowEmptyRulesets?: boolean;
