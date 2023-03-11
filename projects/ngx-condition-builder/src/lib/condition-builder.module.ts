@@ -1,6 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NgxConditionArrowIconDirective } from './condition-arrow-icon.directive';
 import { NgxConditionBuilderComponent } from './condition-builder.component';
 import { NgxConditionButtonGroupDirective } from './condition-button-group.directive';
@@ -29,7 +29,8 @@ import { NgxConditionSwitchGroupDirective } from './condition-switch-group.direc
   ],
   imports: [
     CommonModule,
-    FormsModule
+    FormsModule,
+    ReactiveFormsModule,
   ],
   exports: [
     NgxConditionBuilderComponent,

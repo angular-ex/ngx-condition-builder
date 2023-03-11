@@ -1,6 +1,6 @@
 export interface RuleSet {
   condition: string;
-  rules: Array<RuleSet | Rule>;
+  rules: Array<any>; // RuleSet | Rule
   collapsed?: boolean;
   isChild?: boolean;
 }

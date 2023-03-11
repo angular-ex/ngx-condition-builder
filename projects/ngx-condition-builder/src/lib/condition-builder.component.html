@@ -53,8 +53,7 @@
 
 <div #treeContainer (transitionend)="transitionEnd($event)" [ngClass]="getClassNames('treeContainer', data.collapsed ? 'collapsed' : null)">
   <ul [ngClass]="getClassNames('tree')" *ngIf="data && data.rules">
-    <ng-container *ngFor="let rule of data.rules;let i=index">
-
+    <ng-container *ngFor="let rule of data.rules; let i=index">
       <ng-container *ngIf="{ruleset: !!rule.rules, invalid: !config.allowEmptyRulesets && rule.rules && rule.rules.length === 0} as local">
         <li [ngClass]="getQueryItemClassName(local)">
           <ng-container *ngIf="!local.ruleset">
@@ -73,7 +72,7 @@
               </div>
             </ng-template>
 
-            <div *ngIf="entities?.length > 0" class="q-inline-block-display">
+            <div *ngIf="entities && entities.length > 0" class="q-inline-block-display">
               <ng-container *ngIf="getEntityTemplate() as template; else defaultEntity">
                 <ng-container *ngTemplateOutlet="template; context: getEntityContext(rule)"></ng-container>
               </ng-container>
@@ -154,7 +153,7 @@
             </ng-template>
 
           </ng-container>
-          <query-builder *ngIf="local.ruleset" [data]="rule" [disabled]="disabled" [parentTouchedCallback]="parentTouchedCallback || onTouchedCallback"
+          <ngx-condition-builder *ngIf="local.ruleset" [data]="rule" [disabled]="disabled" [parentTouchedCallback]="parentTouchedCallback || onTouchedCallback"
             [parentChangeCallback]="parentChangeCallback || onChangeCallback" [parentInputTemplates]="parentInputTemplates || inputTemplates"
             [parentOperatorTemplate]="parentOperatorTemplate || operatorTemplate" [parentFieldTemplate]="parentFieldTemplate || fieldTemplate"
             [parentEntityTemplate]="parentEntityTemplate || entityTemplate" [parentSwitchGroupTemplate]="parentSwitchGroupTemplate || switchGroupTemplate"
@@ -162,7 +161,7 @@
             [parentEmptyWarningTemplate]="parentEmptyWarningTemplate || emptyWarningTemplate" [parentArrowIconTemplate]="parentArrowIconTemplate || arrowIconTemplate"
             [parentValue]="data" [classNames]="classNames" [config]="config" [allowRuleset]="allowRuleset"
             [allowCollapse]="allowCollapse" [emptyMessage]="emptyMessage" [operatorMap]="operatorMap">
-          </query-builder>
+          </ngx-condition-builder>
 
           <ng-container *ngIf="getEmptyWarningTemplate() as template; else defaultEmptyWarning">
             <ng-container *ngIf="local.invalid">

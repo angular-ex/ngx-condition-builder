@@ -69,8 +69,7 @@ export const VALIDATOR: any = {
   providers: [CONTROL_VALUE_ACCESSOR, VALIDATOR],
 })
 export class NgxConditionBuilderComponent
-  implements OnInit, OnChanges, ControlValueAccessor, Validator
-{
+  implements OnInit, OnChanges, ControlValueAccessor, Validator {
   public fields: Field[] = [];
   public filterFields: Field[] = []; // TODO: ?
   public entities: Entity[] = [];
@@ -194,11 +193,10 @@ export class NgxConditionBuilderComponent
   private removeButtonContextCache = new Map<Rule, RemoveButtonContext>();
   private buttonGroupContext?: ButtonGroupContext;
 
-  constructor(private changeDetectorRef: ChangeDetectorRef) {}
+  constructor(private changeDetectorRef: ChangeDetectorRef) { }
 
   //#region OnInit Implementation
   ngOnInit(): void {
-    throw new Error('Method not implemented.');
   }
   //#endregion
 
@@ -296,11 +294,14 @@ export class NgxConditionBuilderComponent
     return null;
   }
 
-  findQueryInput(type: string): NgxConditionInputDirective | undefined {
+  findQueryInput(type: string): NgxConditionInputDirective | null {
     const templates = this.parentInputTemplates || this.inputTemplates;
+
+    if (!templates) return null;
+
     return templates.find(
       (item: NgxConditionInputDirective) => item.queryInputType === type
-    );
+    ) || null;
   }
 
   getOperators(field?: string): string[] {
@@ -328,7 +329,7 @@ export class NgxConditionBuilderComponent
       if (operators.length === 0) {
         console.warn(
           `No operators found for field '${field}' with type ${fieldObject.type}. ` +
-            `Please define an 'operators' property on the field or use the 'operatorMap' binding to fix this.`
+          `Please define an 'operators' property on the field or use the 'operatorMap' binding to fix this.`
         );
       }
       if (fieldObject.nullable) {
@@ -411,7 +412,7 @@ export class NgxConditionBuilderComponent
       } else {
         console.warn(
           `No fields found for entity '${entity.name}'. ` +
-            `A 'defaultOperator' is also not specified on the field config. Operator value will default to null.`
+          `A 'defaultOperator' is also not specified on the field config. Operator value will default to null.`
         );
       }
     }
@@ -430,7 +431,7 @@ export class NgxConditionBuilderComponent
       } else {
         console.warn(
           `No operators found for field '${field.value}'. ` +
-            `A 'defaultOperator' is also not specified on the field config. Operator value will default to null.`
+          `A 'defaultOperator' is also not specified on the field config. Operator value will default to null.`
         );
       }
     }
@@ -717,10 +718,13 @@ export class NgxConditionBuilderComponent
 
   getQueryItemClassName(local: LocalRuleMeta): string | null {
     let cls = this.getClassNames('row', 'connector', 'transition');
+
     cls += ' ' + this.getClassNames(local.ruleset ? 'ruleSet' : 'rule');
+
     if (local.invalid) {
       cls += ' ' + this.getClassNames('invalidRuleSet');
     }
+
     return cls;
   }
 
@@ -728,19 +732,20 @@ export class NgxConditionBuilderComponent
     if (!this.buttonGroupContext) {
       this.buttonGroupContext = {
         addRule: this.addRule.bind(this),
-        addRuleSet: this.allowRuleset ? this.addRuleSet.bind(this) : () => {},
+        addRuleSet: this.allowRuleset ? this.addRuleSet.bind(this) : () => { },
         removeRuleSet:
           this.allowRuleset &&
-          this.parentValue ?
-          this.removeRuleSet.bind(this) : () => {},
+            this.parentValue ?
+            this.removeRuleSet.bind(this) : () => { },
         getDisabledState: this.getDisabledState,
         $implicit: this.data,
       };
     }
+
     return this.buttonGroupContext;
   }
 
-  getRemoveButtonContext(rule: Rule): RemoveButtonContext | undefined {
+  getRemoveButtonContext(rule: Rule): RemoveButtonContext | null {
     if (!this.removeButtonContextCache.has(rule)) {
       this.removeButtonContextCache.set(rule, {
         removeRule: this.removeRule.bind(this),
@@ -748,10 +753,11 @@ export class NgxConditionBuilderComponent
         $implicit: rule,
       });
     }
-    return this.removeButtonContextCache.get(rule);
+
+    return this.removeButtonContextCache.get(rule) || null;
   }
 
-  getFieldContext(rule: Rule): FieldContext | undefined {
+  getFieldContext(rule: Rule): FieldContext | null {
     if (!this.fieldContextCache.has(rule)) {
       this.fieldContextCache.set(rule, {
         onChange: this.changeField.bind(this),
@@ -761,10 +767,11 @@ export class NgxConditionBuilderComponent
         $implicit: rule,
       });
     }
-    return this.fieldContextCache.get(rule);
+
+    return this.fieldContextCache.get(rule) || null;
   }
 
-  getEntityContext(rule: Rule): EntityContext | undefined {
+  getEntityContext(rule: Rule): EntityContext | null {
     if (!this.entityContextCache.has(rule)) {
       this.entityContextCache.set(rule, {
         onChange: this.changeEntity.bind(this),
@@ -773,7 +780,8 @@ export class NgxConditionBuilderComponent
         $implicit: rule,
       });
     }
-    return this.entityContextCache.get(rule);
+
+    return this.entityContextCache.get(rule) || null;
   }
 
   getSwitchGroupContext(): SwitchGroupContext {
@@ -799,7 +807,7 @@ export class NgxConditionBuilderComponent
     };
   }
 
-  getOperatorContext(rule: Rule): OperatorContext | undefined {
+  getOperatorContext(rule: Rule): OperatorContext | null {
     if (!this.operatorContextCache.has(rule)) {
       this.operatorContextCache.set(rule, {
         onChange: this.changeOperator.bind(this),
@@ -808,10 +816,10 @@ export class NgxConditionBuilderComponent
         $implicit: rule,
       });
     }
-    return this.operatorContextCache.get(rule);
+    return this.operatorContextCache.get(rule) || null;
   }
 
-  getInputContext(rule: Rule): InputContext | undefined {
+  getInputContext(rule: Rule): InputContext | null {
     if (!this.inputContextCache.has(rule)) {
       this.inputContextCache.set(rule, {
         onChange: this.changeInput.bind(this),
@@ -821,7 +829,8 @@ export class NgxConditionBuilderComponent
         $implicit: rule,
       });
     }
-    return this.inputContextCache.get(rule);
+
+    return this.inputContextCache.get(rule) || null;
   }
 
   private calculateFieldChangeValue(
