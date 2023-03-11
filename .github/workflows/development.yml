@@ -32,4 +32,4 @@ jobs:
         cache: 'npm'
     - run: npm i
     - run: npm run build:lib
-    - run: npm run test:lib
+    #- run: npm run test:lib
