@@ -4,8 +4,9 @@
   "scripts": {
     "ng": "ng",
     "start": "ng serve ngx-condition-builder-demo",
-    "build:app": "ng build ngx-condition-builder-demo --configuration production",
-    "watch:app": "ng build ngx-condition-builder-demo --watch --configuration development",
+    "build:demo": "ng build ngx-condition-builder-demo --configuration production",
+    "build:demo:ghpg": "ng build ngx-condition-builder-demo --configuration production --base-href /ngx-condition-builder/ --deploy-url /ngx-condition-builder/",
+    "watch:demo": "ng build ngx-condition-builder-demo --watch --configuration development",
     "build:lib": "ng build ngx-condition-builder --configuration production",
     "test:lib": "ng test ngx-condition-builder"
   },
