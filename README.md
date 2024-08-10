@@ -13,7 +13,7 @@
   </a>
 </p>
 
-> [!NOTE]  
+> [!NOTE]
 > This is a folk of zebzhao's [repo](https://github.com/zebzhao/Angular-QueryBuilder) to maintence with the latest Angular
 
 A modernized Angular 4+ query builder based on jQuery QueryBuilder. Support for heavy customization with Angular components and provides a flexible way to handle custom data types.
@@ -28,12 +28,12 @@ $ npm install @angular-ex/ngx-condition-builder --save
 
 ##### `app.module.ts`
 ```javascript
-import { QueryBuilderModule } from "angular2-query-builder";
+import { NgxConditionBuilderModule } from '@angular-ex/ngx-condition-builder';
 import { AppComponent } from "./app.component"
 
 @NgModule(imports: [
   ...,
-  QueryBuilderModule,
+  NgxConditionBuilderModule,
   IonicModule.forRoot(AppComponent) // (Optional) for IonicFramework 2+
 ])
 export class AppModule { }
@@ -42,12 +42,12 @@ export class AppModule { }
 ##### `app.component.html`
 ```html
 ...
-<query-builder [(ngModel)]='query' [config]='config'></query-builder>
+<ngx-condition-builder [(ngModel)]='query' [config]='config'></ngx-condition-builder>
 ...
 ```
 ##### `app.component.ts`
 ```javascript
-import { QueryBuilderConfig } from 'angular2-query-builder';
+import { ConditionBuilderConfig } from '@angular-ex/ngx-condition-builder';
 
 export class AppComponent {
   query = {
@@ -57,8 +57,8 @@ export class AppComponent {
       {field: 'gender', operator: '>=', value: 'm'}
     ]
   };
-  
-  config: QueryBuilderConfig = {
+
+  config: ConditionBuilderConfig = {
     fields: {
       age: {name: 'Age', type: 'number'},
       gender: {
@@ -78,11 +78,11 @@ export class AppComponent {
 
 ##### `app.component.html`
 ```html
-<query-builder [(ngModel)]='query' [config]='config'>
+<ngx-condition-builder [(ngModel)]='query' [config]='config'>
   <ng-container *queryInput="let rule; type: 'date'">
     <custom-datepicker [(ngModel)]="rule.value"></custom-datepicker>
   </ng-container>
-</query-builder>
+</ngx-condition-builder>
 ```
 
 ##### `app.component.ts`
@@ -94,7 +94,7 @@ query = {
   ]
 };
 
-config: QueryBuilderConfig = {
+config: ConditionBuilderConfig = {
   fields: {
     birthday: {name: 'Birthday', type: 'date', operators: ['=', '<=', '>']
       defaultValue: (() => return new Date())
@@ -107,11 +107,11 @@ config: QueryBuilderConfig = {
 
 ##### `app.component.html`
 ```html
-<query-builder [(ngModel)]='query' [config]='config' [classNames]='classNames'></query-builder>
+<ngx-condition-builder [(ngModel)]='query' [config]='config' [classNames]='classNames'></ngx-condition-builder>
 ```
 ##### `app.component.ts`
 ```javascript
-classNames: QueryBuilderClassNames = {
+classNames: ConditionBuilderClassNames = {
   removeIcon: 'fa fa-minus',
   addIcon: 'fa fa-plus',
   arrowIcon: 'fa fa-chevron-right px-2',
@@ -146,7 +146,7 @@ Example of how you can completely customize the query component with another lib
 #### `app.component.html`
 
 ```html
-<query-builder [(ngModel)]='query' [config]='config'>
+<ngx-condition-builder [(ngModel)]='query' [config]='config'>
   <ng-container *queryButtonGroup="let ruleset; let addRule=addRule; let addRuleSet=addRuleSet; let removeRuleSet=removeRuleSet">
     <button type="button" mat-button (click)="addRule()">+ Rule</button>
     <button type="button" mat-button (click)="addRuleSet()">+ Ruleset</button>
@@ -192,7 +192,7 @@ Example of how you can completely customize the query component with another lib
     </mat-form-field>
   </ng-container>
   ...
-</query-builder>
+</ngx-condition-builder>
 ```
 
 ## Property Bindings Quick Reference
